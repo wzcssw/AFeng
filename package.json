@@ -1,0 +1,28 @@
+{
+  "name": "node_test",
+  "version": "1.0.0",
+  "description": "node_test",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development pm2 start app.js --watch -l",
+    "test": "NODE_ENV=development node --harmony app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/username/repository.git"
+  },
+  "dependencies": {
+    "koa": "^1.2.0",
+    "koa-bodyparser": "^2.0.1",
+    "koa-canvas-captcha": "0.1.4",
+    "koa-router": "^5.4.0",
+    "koa-session-redis": "1.1.0",
+    "koa-static-cache": "3.1.7",
+    "md5": "2.1.0",
+    "svg-captcha": "^1.3.11",
+    "xtemplate": "4.2.4",
+    "xtpl": "3.1.9"
+  }
+}
