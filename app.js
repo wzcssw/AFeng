@@ -12,14 +12,17 @@ app.use(bodyParser());
 
 app.keys = config.session_redis.key;
 
+// session
+app.use(session({ store: config.session_redis,db: config.session_redis.db}));
+
+// 登录拦截
+app.use(filters.session_filter);
+
 ///////
 app.use(staticCache(path.join(__dirname, 'public'), {
     maxAge: 365 * 24 * 60 * 60 ,
     alias: {'/': '/html/index.html'}
 }));
-
-// session
-app.use(session({ store: config.session_redis,db: config.session_redis.db}));
 
 // 
 app.use(function *(next){
@@ -31,7 +34,7 @@ app.use(function *(next){
 app.use(staticCache(path.join(__dirname, 'public'), {
     maxAge: 365 * 24 * 60 * 60 ,
     alias: {'/': '/html/index.html'}
-}));
+}))
 
 // app.on('error', function(err,ctx){
 //     console.log('--------  出错了 -----\n\n'
@@ -42,7 +45,7 @@ app.use(staticCache(path.join(__dirname, 'public'), {
 xtpl(app,{
     //配置模板目录，指向工程的view目录
     views: "template"
-});
+})
 
 // 引入路由
 require('./route')(app);
