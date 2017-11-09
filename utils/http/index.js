@@ -6,7 +6,6 @@ const md5 = require('md5');
 
 
 function request(method,path,params) {
-    console.log("AA",config.api_host,config.api_port,path,params)
     return new Promise((resolve,reject)=>{
         var param = params || {};
         var postData = JSON.stringify(param);
@@ -27,12 +26,6 @@ function request(method,path,params) {
                 result += chunk;
             });
             res.on('end', () => {
-                // var status_code = parseInt(res.statusCode / 100);
-                // if(2 === status_code || 2 === status_code){
-                //     resolve(JSON.parse(result));
-                // }else{
-                //     reject(JSON.parse(result));
-                // }
                 resolve(JSON.parse(result));
             });
         });

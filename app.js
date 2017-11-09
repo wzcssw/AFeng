@@ -18,28 +18,11 @@ app.use(session({ store: config.session_redis,db: config.session_redis.db}));
 // 登录拦截
 app.use(filters.session_filter);
 
-///////
-app.use(staticCache(path.join(__dirname, 'public'), {
-    maxAge: 365 * 24 * 60 * 60 ,
-    alias: {'/': '/html/index.html'}
-}));
-
-// 
-app.use(function *(next){
-    console.log("ABCDEFG============")
-    yield next
-});
-
 // 静态文件cache
 app.use(staticCache(path.join(__dirname, 'public'), {
     maxAge: 365 * 24 * 60 * 60 ,
     alias: {'/': '/html/index.html'}
 }))
-
-// app.on('error', function(err,ctx){
-//     console.log('--------  出错了 -----\n\n'
-//         + err +'\n\n-------------------------');
-// });
 
 //xtemplate 模板渲染
 xtpl(app,{
@@ -48,7 +31,6 @@ xtpl(app,{
 })
 
 // 引入路由
-require('./route')(app);
 require('./api')(app);
 
 app.listen(config.port, function(){
